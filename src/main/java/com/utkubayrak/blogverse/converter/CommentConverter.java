@@ -13,8 +13,8 @@ public class CommentConverter {
         return CommentResponse.builder()
                 .id(commentEntity.getId())
                 .content(commentEntity.getCommentContent())
-                .userId(commentEntity.getUserEntity().getId())
-                .userFullName(commentEntity.getUserEntity().getFullName())
+                .userId(commentEntity.getUser().getId())
+                .userFullName(commentEntity.getUser().getFullName())
                 .createdDate(commentEntity.getCreatedDate())
                 .build();
     }

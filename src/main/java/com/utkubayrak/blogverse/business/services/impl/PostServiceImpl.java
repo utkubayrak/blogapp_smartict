@@ -64,27 +64,23 @@ public class PostServiceImpl implements IPostService {
             throw new RuntimeException("Post not found with id: " + postId);
         }
         PostEntity postEntity = postEntityOptional.get();
-        // İlgili post'a ait tüm yorumları sil
         List<CommentEntity> comments = commentRepository.findByPost_id(postId);
         for (CommentEntity commentEntity : comments){
-            // Her bir yorumun kullanıcıyla olan ilişkisini temizleyin
-            UserEntity userEntity = commentEntity.getUserEntity();
+            UserEntity userEntity = commentEntity.getUser();
             if (userEntity != null) {
                 userEntity.getComments().remove(commentEntity);
-                userRepository.save(userEntity); // Kullanıcıyı güncelleyin
+                userRepository.save(userEntity);
             }
             PostEntity postEntity1 = commentEntity.getPost();
             postEntity1.getComments().remove(commentEntity);
             postRepository.save(postEntity);
         }
-        commentRepository.deleteAll(comments); // Yorumları veritabanından silin
-        // Post'un kullanıcı ile olan ilişkisini temizleyin
+        commentRepository.deleteAll(comments);
         UserEntity userEntity = postEntity.getUser();
         if (userEntity != null) {
             userEntity.getPosts().remove(postEntity);
-            userRepository.save(userEntity); // Kullanıcıyı güncelleyin
+            userRepository.save(userEntity);
         }
-        // Post'u veritabanından silin
         postRepository.delete(postEntity);
     }
     @Override

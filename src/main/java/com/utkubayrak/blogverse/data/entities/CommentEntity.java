@@ -27,7 +27,8 @@ public class CommentEntity {
     private PostEntity post;
 
     @ManyToOne
-    private UserEntity userEntity;
+    @JoinColumn(name = "user_id")
+    private UserEntity user;
 
     @PrePersist
     protected void onCreate() {

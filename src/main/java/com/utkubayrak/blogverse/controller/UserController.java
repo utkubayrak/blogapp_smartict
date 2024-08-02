@@ -23,6 +23,6 @@ public class UserController {
     public ResponseEntity<?> deleteUser(@RequestHeader("Authorization") String jwt) throws Exception {
         UserEntity userEntity = userService.findUserByJwtToken(jwt);
         userService.deleteUser(userEntity.getId());
-        return new ResponseEntity<>(HttpStatus.OK);
+        return ResponseEntity.ok().body("Hesabınız silinmiştir.");
     }
 }

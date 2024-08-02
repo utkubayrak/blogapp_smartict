@@ -25,7 +25,6 @@ public class AppConfig {
         //güvenlik filtrelerinin bir zincirini temsil eder. Bu filtreler, gelen HTTP isteklerini işler ve yetkilendirme, kimlik doğrulama, oturum yönetimi gibi güvenlik işlemlerini gerçekleştirir.
         http.sessionManagement(managment -> managment.sessionCreationPolicy(SessionCreationPolicy.STATELESS)) //oturum yönetimini yapılandırır.oturumların durumsuz (stateless) olacağını belirtir. Yani sunucu tarafında oturum bilgisi saklanmaz.
                 .authorizeHttpRequests(Authorize -> Authorize
-                        //.requestMatchers("/api/admin/**").hasAnyRole("RESTAURANT_OWNER","ADMIN") //yolu, “RESTAURANT_OWNER” veya “ADMIN” rolüne sahip kullanıcılara izin verir.
                         .requestMatchers("/api/**").authenticated() //yolu, kimlik doğrulanmış kullanıcılara izin verir.
                         .requestMatchers("/v3/api-docs/**", "/swagger-ui.html", "/swagger-ui/**").permitAll()
                         .anyRequest().permitAll() //Diğer tüm istekler herkese açıktır.
