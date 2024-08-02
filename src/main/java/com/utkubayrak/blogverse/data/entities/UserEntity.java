@@ -15,7 +15,6 @@ import java.util.List;
 @NoArgsConstructor
 
 @Entity
-@Table(name = "user")
 public class UserEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -33,5 +32,8 @@ public class UserEntity {
 
     @OneToMany
     private List<PostEntity> posts = new ArrayList<>();
+
+    @OneToMany
+    private List<CommentEntity> comments = new ArrayList<>();
 
 }

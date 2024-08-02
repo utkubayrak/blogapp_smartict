@@ -19,7 +19,6 @@ import java.util.Set;
 @NoArgsConstructor
 
 @Entity
-@Table(name = "post")
 public class PostEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -41,6 +40,9 @@ public class PostEntity {
 
     @ManyToOne(fetch = FetchType.LAZY)
     private UserEntity user;
+
+    @OneToMany
+    private List<CommentEntity> comments = new ArrayList<>();
 
     @PrePersist
     protected void onCreate() {

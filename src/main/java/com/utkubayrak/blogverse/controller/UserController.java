@@ -5,10 +5,7 @@ import com.utkubayrak.blogverse.data.entities.UserEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestHeader;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/users")
@@ -20,5 +17,12 @@ public class UserController {
     public ResponseEntity<UserEntity> findUserByJwtToken(@RequestHeader("Authorization") String jwt) throws Exception {
         UserEntity userEntity = userService.findUserByJwtToken(jwt);
         return new ResponseEntity<>(userEntity, HttpStatus.OK);
+    }
+
+    @DeleteMapping("/delete")
+    public ResponseEntity<?> deleteUser(@RequestHeader("Authorization") String jwt) throws Exception {
+        UserEntity userEntity = userService.findUserByJwtToken(jwt);
+        userService.deleteUser(userEntity.getId());
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 }

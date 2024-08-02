@@ -21,6 +21,9 @@ public class PostConverter {
                 .categories(postEntity.getCategories())
                 .createdDate(postEntity.getCreatedDate())
                 .updatedDate(postEntity.getUpdatedDate())
+                .comments(postEntity.getComments().stream()
+                .map(CommentConverter::toResponse)
+                .collect(Collectors.toList()))
                 .build();
     }
     public static List<PostResponse> toResponseList(List<PostEntity> postEntities) {
