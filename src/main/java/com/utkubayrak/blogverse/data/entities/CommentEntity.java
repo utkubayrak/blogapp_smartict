@@ -12,6 +12,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 
 @Entity
+@Table(name = "comments")
 public class CommentEntity {
 
     @Id
